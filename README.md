@@ -11,14 +11,14 @@ To get started the application:
 * install all project dependencies with `yarn install`
 * start the development server with `yarn start`
 
+## Device
+
+This app is tested in Android simulator (Android 9.+)
 
 ## Redux : State managed by Store
 
 This app uses Redux.
 Following state is managed by store:
-
-### questions
-Questions with answeres categoriezed in Decks
 
 ### questions
 Question info.

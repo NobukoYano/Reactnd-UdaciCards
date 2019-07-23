@@ -41,8 +41,8 @@ let questions = {
 |-- actions
 |   `-- index.js
 |-- assets
-|   `-- images
-|       `-- logo.svg
+|   |-- icon.png
+|   `-- splash.png
 |-- components
 |   |-- App.js          # XXX
 |   |-- XXXXX.js        # XXXXX

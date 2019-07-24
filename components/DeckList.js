@@ -1,10 +1,33 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { receiveCards } from '../actions';
 import { fetchCardsResults } from '../utils/api';
 import { AppLoading } from 'expo';
 import { white, blue, gray } from '../utils/colors';
+import { testFetchCards, clearAll } from '../utils/api';
+
+function ShowBtn ({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={{alignItems: 'center'}}
+            onPress={onPress}
+        >
+            <Text style={styles.addCardBtnText}>Show</Text>
+        </TouchableOpacity>
+    )
+}
+
+function ClearBtn ({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={{alignItems: 'center'}}
+            onPress={onPress}
+        >
+            <Text style={styles.addCardBtnText}>Clear</Text>
+        </TouchableOpacity>
+    )
+}
 
 class DeckList extends Component {
     state = {
@@ -17,6 +40,22 @@ class DeckList extends Component {
             .then((cards) => dispatch(receiveCards(cards)))
             .then(() => this.setState(() => ({ready: true})));
     }
+    show = () => {
+        const { cards } = this.props;
+        testFetchCards()
+            .then((result) => {
+                console.log(`Show:AsyncStorage ###: ${result}`)
+            });
+        
+        console.log('Show: redux state ###:', cards)
+
+    }
+    clear = () => {
+        clearAll()
+            .then((result) => {
+                console.log(`Clear:AsyncStorage ###: ${result}`)
+            });
+    }
     render() {
         const { cards } = this.props
         const { ready } = this.state
@@ -24,7 +63,7 @@ class DeckList extends Component {
             return <AppLoading />
         }
         return (
-            <View>
+            <ScrollView>
                 { Object.keys(cards).map((key) => {
                     const num = cards[key].questions.length;
                     return (
@@ -41,7 +80,9 @@ class DeckList extends Component {
                         </Text>
                     </TouchableOpacity>
                 )})}
-            </View>
+                <ShowBtn onPress={this.show}/>
+                <ClearBtn onPress={this.clear}/>                
+            </ScrollView>
         )
     }
 }

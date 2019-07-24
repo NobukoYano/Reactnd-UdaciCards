@@ -18,10 +18,7 @@ function cards (state= {}, action) {
         case ADD_CARD:
             return {
                 ...state,
-                [action.title]: {
-                    ...state[action.title],
-                    questions: state[action.title].questions.concat(action.card),
-                },
+                [action.title]: action.newCards,
             }
 
         default:

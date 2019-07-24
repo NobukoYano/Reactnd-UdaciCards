@@ -44,7 +44,11 @@ class Deck extends Component {
         )    
     }
     add = () => {
-
+        const { deckId, } = this.props;
+        this.props.navigation.navigate(
+            'AddCard',
+            { deckId: deckId }        
+        )    
     }
     removeDeck = () => {
 

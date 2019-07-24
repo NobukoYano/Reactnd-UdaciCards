@@ -19,6 +19,7 @@ import Deck from './components/Deck';
 import Card from './components/Card';
 import NoCard from './components/NoCard';
 import Result from './components/Result';
+import AddCard from './components/AddCard';
 
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
@@ -107,7 +108,16 @@ const MainNavigator = createStackNavigator({
         backgroundColor: blue,
       }
     })
-  }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue,
+      }
+    })
+  },
 })
 
 const AppContainer = createAppContainer(MainNavigator);

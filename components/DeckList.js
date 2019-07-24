@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { receiveCards } from '../actions';
 import { fetchCardsResults } from '../utils/api';
 import { AppLoading } from 'expo';
-import { white } from '../utils/colors';
+import { white, blue, gray } from '../utils/colors';
 
 class DeckList extends Component {
     state = {
@@ -25,8 +25,22 @@ class DeckList extends Component {
         }
         return (
             <View>
-                <Text>DeckList View.</Text>
-                <Text>{ JSON.stringify(cards) }</Text>
+                { Object.keys(cards).map((key) => {
+                    const num = cards[key].questions.length;
+                    return (
+                    <TouchableOpacity
+                        key={key}
+                        style={styles.item}
+                        onPress={() => this.props.navigation.navigate(
+                            'Deck',
+                            { deckId: key }        
+                        )}>
+                        <Text style={styles.itemText}>{ key }</Text>
+                        <Text style={[styles.itemText, {color: gray, fontSize: 20}]}>
+                            { ( num <= 1 ) ? `${num} Card` : `${num} Cards` }
+                        </Text>
+                    </TouchableOpacity>
+                )})}
             </View>
         )
     }
@@ -35,7 +49,7 @@ class DeckList extends Component {
 const styles = StyleSheet.create({
     item: {
         backgroundColor: white,
-        borderRadius: 2,
+        borderRadius: 5,
         padding: 20,
         marginLeft: 10,
         marginRight: 20,
@@ -43,12 +57,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         shadowRadius: 3,
         shadowOpacity: 0.8,
-        shadowColor: 'rgba(0,0,0,0.24)',
+        shadowColor: gray,
         shadowOffset: {
             width: 0,
             height: 3,
-        }
+        },
+        elevation: 6,
     },
+    itemText: {
+        fontSize: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center'
+    }
 })
 
 function mapStateToProps (cards) {

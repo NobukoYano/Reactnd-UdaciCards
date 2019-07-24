@@ -16,6 +16,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import AddDeck from './components/AddDeck';
 import DeckList from './components/DeckList';
 import Deck from './components/Deck';
+import Card from './components/Card';
+import NoCard from './components/NoCard';
+import Result from './components/Result';
 
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
@@ -29,15 +32,15 @@ const Tabs = createMaterialTopTabNavigator({
   DeckList: {
     screen: DeckList,
     navigationOptions: {
-      tabBarLabel: 'Deck List',
-      tabBarIcon: ({ tintColor }) => <MaterialIcons name='list' color={tintColor} />,
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ tintColor }) => <MaterialIcons name='home' size={24} color={tintColor} />,
     }
   },
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
-      tabBarLabel: 'Add Entry',
-      tabBarIcon: ({ tintColor }) => <MaterialIcons name='playlist-add' size={30} color={tintColor} />
+      tabBarLabel: 'Add Deck',
+      tabBarIcon: ({ tintColor }) => <MaterialIcons name='playlist-add' size={24} color={tintColor} />
     }
   },
 }, {
@@ -74,7 +77,34 @@ const MainNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: blue,
+      }
+    })
+  },
+  Card: {
+    screen: Card,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue,
+      }
+    })
+  },
+  NoCard: {
+    screen: NoCard,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue,
+      }
+    })
+  },
+  Result: {
+    screen: Result,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: blue,
       }
     })
   }

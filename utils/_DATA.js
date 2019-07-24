@@ -16,7 +16,11 @@ function setDummyData() {
                 {
                     question: 'Where do you make Ajax requests in React?',
                     answer: 'The componentDidMount lifecycle event'
-                }
+                },
+                {
+                    question: 'Question No.3?',
+                    answer: 'Answer No.3'
+                },
             ]
         },
         JavaScript: {

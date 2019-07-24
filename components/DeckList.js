@@ -6,7 +6,9 @@ import { fetchCardsResults } from '../utils/api';
 import { AppLoading } from 'expo';
 import { white, blue, gray } from '../utils/colors';
 import { testFetchCards, clearAll } from '../utils/api';
+import { getLocalNotification } from '../utils/helpers';
 
+// This function is only for debugging
 function ShowBtn ({ onPress }) {
     return (
         <TouchableOpacity
@@ -18,6 +20,7 @@ function ShowBtn ({ onPress }) {
     )
 }
 
+// This function is only for debugging
 function ClearBtn ({ onPress }) {
     return (
         <TouchableOpacity
@@ -40,6 +43,7 @@ class DeckList extends Component {
             .then((cards) => dispatch(receiveCards(cards)))
             .then(() => this.setState(() => ({ready: true})));
     }
+    // only for debug purpose
     show = () => {
         const { cards } = this.props;
         testFetchCards()
@@ -47,9 +51,11 @@ class DeckList extends Component {
                 console.log(`Show:AsyncStorage ###: ${result}`)
             });
         
-        console.log('Show: redux state ###:', cards)
-
+        console.log('Show: redux state ###:', cards);
+        getLocalNotification();
+        
     }
+    // only for debug purpose
     clear = () => {
         clearAll()
             .then((result) => {

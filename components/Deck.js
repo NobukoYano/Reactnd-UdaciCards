@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { white, blue, gray } from '../utils/colors';
 import TextButton from './TextButton';
+import { removeDeck } from '../actions';
+import { removeDeckAsyncStorage } from '../utils/api'; 
 
 function StartBtn ({ onPress }) {
     return (
@@ -51,11 +53,20 @@ class Deck extends Component {
         )    
     }
     removeDeck = () => {
+        const { deckId, } = this.props;
+        // navigate to Home
+        this.props.navigation.navigate('DeckList');
+        // Remove Deck from Redux Store
+        this.props.dispatch(removeDeck(deckId));
+        // Remove Deck from Async DB
+        removeDeckAsyncStorage(deckId);
 
     }    
     render() {
         const {deckId, deckCards } = this.props;
-        const num = deckCards.questions.length;
+        const num = (typeof deckCards === 'undefined')
+            ? 0
+            : deckCards.questions.length;        
         return (
             <View style={styles.container}>
                 <Text style={styles.itemText}>{ deckId }</Text>

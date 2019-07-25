@@ -1,4 +1,4 @@
-import { RECEIVE_CARDS, ADD_CARD, ADD_DECK } from '../actions/index';
+import { RECEIVE_CARDS, ADD_CARD, ADD_DECK, REMOVE_DECK } from '../actions/index';
 
 function cards (state= {}, action) {
     switch (action.type) {
@@ -20,7 +20,14 @@ function cards (state= {}, action) {
                 ...state,
                 [action.title]: action.newCards,
             }
-
+        case REMOVE_DECK:
+            const key = action.title; 
+            let newState = state;
+            delete newState[key]
+            // console.log('newState in Reducer:', newState);
+            return {
+                ...newState,
+            }
         default:
             return state;
     }

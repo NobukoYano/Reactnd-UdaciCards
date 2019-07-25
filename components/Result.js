@@ -3,15 +3,28 @@ import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native
 import { connect } from 'react-redux';
 import { white, purple, blue, gray } from '../utils/colors';
 import { MaterialIcons } from '@expo/vector-icons';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
-
-function HomeBtn ({ onPress }) {
+function GoToDeckBtn ({ onPress }) {
     return (
         <TouchableOpacity
-            style={styles.homeBtn}
+            style={styles.goToDeckBtn}
             onPress={onPress}
         >
-            <MaterialIcons name='home' size={24} color={blue} />
+            <MaterialIcons name='keyboard-return' size={24} color={white} />
+            <Text style={styles.goToDeckBtnText}> Go To Deck</Text>
+        </TouchableOpacity>
+    )
+}
+
+function RetryBtn ({ onPress }) {
+    return (
+        <TouchableOpacity
+            style={styles.retryBtn}
+            onPress={onPress}
+        >
+            <MaterialIcons name='autorenew' size={24} color={blue} />
+            <Text style={styles.retryBtnText}> Retry Quiz</Text>
         </TouchableOpacity>
     )
 }
@@ -32,6 +45,9 @@ class Result extends Component {
             Animated.timing(bounceValue, { duration: 200, toValue:1.04 }),
             Animated.spring(bounceValue, {toValue: 1, friction: 4})
         ]).start();
+
+        clearLocalNotification()
+            .then(setLocalNotification);
     }
     render () {
         const { bounceValue } = this.state;
@@ -46,7 +62,14 @@ class Result extends Component {
                     {`${percentage} %`}
                 </Animated.Text>
                 <Text style={styles.resultText}>correctly.</Text>
-                <HomeBtn onPress={() => {this.props.navigation.navigate('Home')}} />
+                <GoToDeckBtn onPress={() => {this.props.navigation.navigate(
+                    'Deck',
+                    { deckId: deckId }
+                )}} />
+                <RetryBtn onPress={() => {this.props.navigation.navigate(
+                    'Card',
+                    { deckId: deckId, index: 0, correct: 0} 
+                )}} />
             </View>
         )
     }
@@ -75,7 +98,30 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 5
     },
-    homeBtn: {
+    goToDeckBtn: {
+        flexDirection: 'row',
+        backgroundColor: blue,
+        borderColor: blue,
+        borderWidth: 0.5,
+        margin: 10,
+        padding: 10,
+        paddingLeft: 30,
+        paddingRight: 30,
+        borderRadius: 5,
+        height: 45,
+        alignSelf: 'center',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    goToDeckBtnText: {
+        color: white,
+        fontSize: 20,
+        textAlign: 'center',
+        // margin:10,
+        // padding:10,
+    },
+    retryBtn: {
+        flexDirection: 'row',
         backgroundColor: white,
         borderColor: blue,
         borderWidth: 0.5,
@@ -88,6 +134,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'flex-end',
         alignItems: 'center',
+    },
+    retryBtnText: {
+        color: blue,
+        fontSize: 20,
+        textAlign: 'center',
+        // margin:10,
+        // padding:10,
     },
 })
 

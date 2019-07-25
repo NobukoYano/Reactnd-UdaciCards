@@ -30,6 +30,9 @@ class AddCard extends Component {
     addNewCard = () => {
         const { question, answer } = this.state;
         const { deckId, deckCards } = this.props;
+        
+        if ( question === '' || answer === '') return;
+        
         let newCards = deckCards;
         newCards.questions.push(
             {
@@ -116,6 +119,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 5,
         margin: 15,
+        fontSize: 20,
     }
 })
 

@@ -22,6 +22,8 @@ class AddDeck extends Component {
     }
     addNewDeck = () => {
         const { text } = this.state; 
+        
+        if (text === '') return; 
 
         this.props.dispatch(addDeck(text))
         this.setState({ text: '' });
@@ -31,8 +33,8 @@ class AddDeck extends Component {
         // testFetchCards()
         //     .then((result) => console.log(`Add Deck:AsyncStorage After###: ${result}`));
 
-        // Go To Home
-        this.props.navigation.navigate('DeckList');
+        // Go To Deck
+        this.props.navigation.navigate('Deck', { deckId: text} );
         
     }
     render() {
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 5,
         margin: 15,
+        fontSize: 20,
     }
 })
 

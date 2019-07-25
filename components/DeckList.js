@@ -86,14 +86,24 @@ class DeckList extends Component {
                         </Text>
                     </TouchableOpacity>
                 )})}
-                <ShowBtn onPress={this.show}/>
-                <ClearBtn onPress={this.clear}/>                
+                <View>
+                    <Text style={{color:white}}>.</Text>
+                </View>
+                {/* <ShowBtn onPress={this.show}/>
+                <ClearBtn onPress={this.clear}/>  */}
             </ScrollView>
         )
     }
 }
 
+
+
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 10,
+        margin: 10,
+    },
     item: {
         backgroundColor: white,
         borderRadius: 5,

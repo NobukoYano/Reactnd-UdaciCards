@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
-import { white, blue, gray} from '../utils/colors';
+import { white, blue, gray, skyBlue } from '../utils/colors';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
-import { submitDeck, testFetchCards } from '../utils/api';
+import { submitDeck,} from '../utils/api';
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 function AddDeckBtn ({ onPress }) {
     return (
@@ -23,8 +24,15 @@ class AddDeck extends Component {
     addNewDeck = () => {
         const { text } = this.state; 
         
-        if (text === '') return; 
-
+        if (text === '') {
+            showMessage({
+                message: "This field is required",
+                description: "Please input at leaset one character.",
+                type: "warning",
+                backgroundColor: skyBlue,
+              });
+            return; 
+        }
         this.props.dispatch(addDeck(text))
         this.setState({ text: '' });
 
@@ -48,7 +56,8 @@ class AddDeck extends Component {
                     placeholder='Deck Title'
                 />
                 <AddDeckBtn onPress={this.addNewDeck}/>
-             </KeyboardAvoidingView>
+                <FlashMessage position="top" />
+            </KeyboardAvoidingView>
         )
     }
 }

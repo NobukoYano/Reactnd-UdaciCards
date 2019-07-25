@@ -20,12 +20,12 @@ This app is tested in Android simulator (Android 9.+)
 This app uses Redux.
 Following state is managed by store:
 
-### questions
-Question info.
+### cards
+Cards info.
 ```
-let questions = {
+let cards = {
     
-    deckTitle: {
+    [deckTitle]: {
         title: deckTitle,
         questions: [{
             question: questionText,
@@ -40,19 +40,22 @@ let questions = {
 ```bash
 |-- actions
 |   `-- index.js
-|-- assets
-|   |-- icon.png
-|   `-- splash.png
 |-- components
-|   |-- App.js          # XXX
-|   |-- XXXXX.js        # XXXXX
-|   `-- XXXXX.js        # XXXXX
+|   |-- AddCard.js      
+|   |-- AddDeck.js
+|   |-- Card.js      
+|   |-- Deck.js
+|   |-- DeckList.js      
+|   |-- NoCard.js
+|   |-- Result.js
+|   `-- TextButton.js        
 |-- index.js
 |-- reducers
 |   `-- index.js
 `-- utils
     |-- _DATA.js
     |-- api.js
+    |-- colors.js
     `-- helpers.js
 
 ```

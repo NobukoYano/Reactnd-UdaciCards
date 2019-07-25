@@ -8,6 +8,3 @@ export const lightPurp = '#7c53c3';
 
 export const blue = '#4e4cb8';
 export const skyBlue = '#62b9d1';
-
-export const green = '#4cc298';
-

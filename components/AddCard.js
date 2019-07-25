@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
-import { white, blue, gray} from '../utils/colors';
+import { white, blue, gray, green, skyBlue } from '../utils/colors';
 import { connect } from 'react-redux';
 import { addCard } from '../actions';
-import { submitCard, testFetchCards } from '../utils/api';
+import { submitCard } from '../utils/api';
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 function AddCardBtn ({ onPress }) {
     return (
@@ -31,8 +32,15 @@ class AddCard extends Component {
         const { question, answer } = this.state;
         const { deckId, deckCards } = this.props;
         
-        if ( question === '' || answer === '') return;
-        
+        if ( question === '' || answer === '') {
+            showMessage({
+                message: "Both fields are required",
+                description: "Please input at leaset one character.",
+                type: "warning",
+                backgroundColor: skyBlue,
+              });
+            return;
+        }
         let newCards = deckCards;
         newCards.questions.push(
             {
@@ -73,6 +81,7 @@ class AddCard extends Component {
                     placeholder='write answer here'
                 />
                 <AddCardBtn onPress={this.addNewCard}/>
+                <FlashMessage position="top" />
              </KeyboardAvoidingView>
         )
     }
